@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:stable
+        image: nginx:latest
         env:
         - name: DATABASE_PASSWORD
           valueFrom:
