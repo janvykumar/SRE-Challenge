@@ -1,0 +1,34 @@
+---
+- name: K3s Installation
+  hosts: localhost
+  become: yes
+  vars:
+    installer_path: "/tmp/k3s_install.sh"
+
+  tasks:
+    - name: Download k3s installer
+      get_url:
+        url: https://get.k3s.io
+        dest: "{{ installer_path }}"
+        mode: '0755'
+      register: download_status
+      ignore_errors: yes
+
+    - name: Execute k3s installation script
+      command: "{{ installer_path}} --write-kubeconfig-mode 644"
+      args:
+        creates: /usr/local/bin/k3s
+      register: install_result
+
+    - name: Wait for Cluster nodes to be ready
+      command: k3s kubectl get nodes
+      register: node_status
+      until: "' Ready ' in node_status.stdout"
+      retries: 15
+      delay: 10
+      changed_when: false
+
+    - name: Validation
+      debug:
+        msg: "k3s installation successful. Cluster is ready"
+      when: "' Ready ' in node_status.stdout"
