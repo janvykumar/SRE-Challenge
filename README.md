@@ -121,3 +121,8 @@ Once it turns green, check the app in the VM browser:
 http://localhost:30080
 
 ![Application](screenshots/nginx-app.png)
+
+You can verify the secret injection by running this command on your cluster.
+```bash
+k3s kubectl exec -it <pod-name> -- printenv | grep APP_SECRET_KEY
+```
