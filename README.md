@@ -37,6 +37,9 @@ vim install_k3s.yml
 ```bash
 ansible-playbook install_k3s.yml
 ```
+![Ansible Playbook Output](screenshots/Ansible-playbook-output-install-k3s.png)
+
+![k3s Cluster](screenshots/k3s-cluster.png)
 
 ### Part 2: Deploy "Hello World" Nginx Application
 The kubernetes manifest file consists of:
@@ -71,6 +74,19 @@ mkdir ~/actions-runner && cd ~/actions-runner
 ```
 *Note: Keep this terminal window open. The runner must be "Listening" for the pipeline to work.*
 
+ 5. ***Configure GitHub Secrets***: 
+To ensure the pipeline can securely handle sensitive data without hardcoding it, we add the API key to GitHub:
+
+- In your GitHub repository, go to **Settings** > **Secrets and variables** > **Actions**.
+- Click on **New repository secret**.
+- **Name**: `API_KEY`
+- **Value**: Enter your secret value (e.g., sre_challenge_2026).
+- Click **Add secret**.
+
+*Note: The pipeline uses the name `API_KEY` to create the Kubernetes secret dynamically during deployment.*
+
+![secrets](screenshots/secrets.png)
+
 ***Set up the GitHub pipeline Code***
 This code tells GitHub what steps to take when a code is pushed.
 ```bash
@@ -94,9 +110,14 @@ git commit -m "Initial SRE project commit"
 git branch -M main
 git push -u origin main
 ```
+![Github-Actions-deployment](screenshots/Github-Actions.png)
+
+![pod](screenshots/pods.png)
 
 ### Part 5: Validation
 
 Go to the **Actions** tab on GitHub Repository. You will see the pipeline running.
 Once it turns green, check the app in the VM browser: 
 http://localhost:30080
+
+![Application](screenshots/nginx-app.png)
