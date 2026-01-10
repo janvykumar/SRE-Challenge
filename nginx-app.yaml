@@ -8,7 +8,7 @@ data:
     <html>
     <body>
       <h1>Hello World</h1>
-      <p>SRE Challenge Completed! - DONE!!!</p>
+      <p>SRE Challenge Completed!</p>
     </body>
     </html>
 ---
@@ -30,11 +30,11 @@ spec:
       - name: nginx
         image: nginx:latest
         env:
-        - name: DATABASE_PASSWORD
+        - name: APP_SECRET_KEY
           valueFrom:
             secretKeyRef:
-              name: nginx-db-secret
-              key: password
+              name: app-secrets
+              key: API_KEY
         ports:
         - containerPort: 80
         volumeMounts:

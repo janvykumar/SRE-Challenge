@@ -41,7 +41,7 @@ ansible-playbook install_k3s.yml
 ### Part 2: Deploy "Hello World" Nginx Application
 The kubernetes manifest file consists of:
 - **Config Map** - It contains the "Hello World" HTML code.
-- **Deployment** - It pulls the standard nginx:latest image. It mounts the HTML from the ConfigMap into the Nginx document root (/usr/share/nginx/html) using a volume and demonstrates secure secret handling by injecting a DATABASE_PASSWORD environment variable.
+- **Deployment** - It pulls the standard nginx:latest image. It mounts the HTML from the ConfigMap into the Nginx document root (/usr/share/nginx/html) using a volume and demonstrates secure secret handling.
 - **Service** - It uses a NodePort (30080), which exposes the "Hello World" application on a specific port across the cluster node.
 
 ***Create a kubernetes Manifest file named nginx-app.yaml***

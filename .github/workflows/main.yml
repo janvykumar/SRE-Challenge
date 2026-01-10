@@ -13,8 +13,8 @@ jobs:
 
       - name: Create K8s Application Secret
         run: |
-          kubectl create secret generic nginx-db-secret \
-            --from-literal=password="${{ secrets.MOCK_DB_PASSWORD }}" \
+          kubectl create secret generic app-secrets \
+            --from-literal=API_KEY="${{ secrets.API_KEY }}" \
             --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Deploy to k3s
