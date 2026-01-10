@@ -118,7 +118,7 @@ git push -u origin main
 
 Go to the **Actions** tab on GitHub Repository. You will see the pipeline running.
 Once it turns green, check the app in the VM browser: 
-http://localhost:30080
+http://<IP>:30080
 
 ![Application](screenshots/nginx-app.png)
 
